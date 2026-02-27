@@ -1,12 +1,7 @@
-FROM gcc:latest
+FROM python:3.10-slim
 
 WORKDIR /app
-COPY app.cpp .
-
-RUN g++ app.cpp -o app
 
 EXPOSE 8080
 
-CMD while true; do \
-    echo -e "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nServed by backend: $(hostname)" | nc -l -p 8080; \
-done
+CMD python -m http.server 8080
